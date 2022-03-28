@@ -1,39 +1,29 @@
-//can't be tested until card model is done
+//these routes represent fetching the ACTUAL card data
 const router = require('express').Router();
-const { Card } = require('../../models');
+const mtg = require('mtgsdk');
 
 // GET /api/cards
+// GET /api/cards?name=Squee
 router.get('/', (req, res) => {
-	Card.findAll({
-		attributes: [
-			'id',
-			'name'
-		]
-	})
-		.then(dbCardData => res.json(dbCardData))
-		.catch(err => {
-			console.error(err);
-			res.status(500).json(err);
+	let {page, pageSize, ...query} = req.query;
+	page = page || 1;
+	pageSize = pageSize || 20;
+	mtg.card.where({ page, pageSize, ...query })
+		.then(cards => {
+			cards.forEach(card => console.log(card.name));
+			res.json(cards);
 		});
 });
 
-// GET /api/cards/1
-router.get('/:id', (req, res) => {
-	Card.findOne({
-		where: {
-			id: req.params.id
-		},
-		attributes: [
-			'id',
-			'name'
-		]
-	})
-		.then(dbCardData => {
-			if (!dbCardData) {
-        res.status(404).json({ message: 'No card found with this id' });
+// GET /api/cards/3
+router.get('/:multiverseid', (req, res) => {
+	mtg.card.find(req.params.multiverseid)
+		.then(cardData => {
+			if (!cardData) {
+				res.status(404).json({ message: 'No card found with this multiverseid' });
         return;
 			}
-			res.json(dbCardData)
+			res.json(cardData.card);
 		})
 		.catch(err => {
 			console.error(err);
