@@ -10,24 +10,10 @@ Card.init(
             primaryKey: true,
             autoIncrement: true
         },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        cardType: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        power: {
+        multiverseId: {
             type: DataTypes.INTEGER,
             allowNull: false
-        },
-        toughness: {
-            type: DataTypes.INTEGER,
-            allownull: false
-
         }
-
     },
     {
         sequelize,
