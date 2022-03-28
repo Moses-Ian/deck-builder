@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-	"dev": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
     "express-session": "^1.17.2",
-    "mtg-json": "^1.0.1",
     "mtgsdk": "^1.0.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.17.0"
