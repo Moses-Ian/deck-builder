@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
     // include: [
 			// {
 				// model: Deck,
-				// attributes: ['id', 'title', 'post_url', 'created_at']
+				// attributes: []
 			// },
 		// ]
 	})
@@ -86,12 +86,6 @@ router.put('/:id', [withAuth, writeAuth], (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', [withAuth, writeAuth], (req, res) => {
-	console.log("got here");
-	console.log(req.session);
-	if (req.session.user_id != req.params.id) {
-		res.status(401).json({ message: 'You do not have authorization'});
-		return;
-	}
   User.destroy({
     where: {
       id: req.params.id
