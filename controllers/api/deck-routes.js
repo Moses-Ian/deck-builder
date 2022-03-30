@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Deck } = require('../../models');
+const { User, Deck, Deck_Components } = require('../../models');
+const mtg = require('mtgsdk');
 const { withAuth } = require('../../utils/auth');
 
 // GET /api/decks
@@ -17,20 +18,39 @@ router.get('/:id', (req, res) => {
 	Deck.findOne({
 		where: {
 			id: req.params.id
-		}
-    // include: [
-			// {
-				// model: User,
-				// attributes: []
-			// },
-		// ]
+		},
+		attributes: [
+			'id',
+			'name'
+		],
+    include: [
+			{
+				model: User,
+				attributes: ['id', 'username']
+			},
+			{
+				model: Deck_Components,
+				attributes: ['id', 'multiverseId']
+			}
+		]
 	})
 		.then(dbDeckData => {
 			if (!dbDeckData) {
 				res.status(404).json({ message: 'No deck found with this id' });
 				return;
 			}
-			res.json(dbDeckData);
+			//get the cards from mtg based on the multiverse ids
+			let resObj = {
+				id:   dbDeckData.id,
+				name: dbDeckData.name,
+				user: dbDeckData.user
+			};
+			const id_arr = dbDeckData.cards.map(card => card.multiverseId).join(',');
+			mtg.card.where({multiverseid: id_arr})
+				.then(cards => {
+					resObj.cards = cards;
+					res.json(resObj);
+				});
 		})
 		.catch(err => {
 			console.log(err);
@@ -89,5 +109,41 @@ router.delete('/:id', withAuth, (req, res) => {
       res.status(500).json(err);
     });
 });
+
+router.post('/add-card', (req, res) => {
+	Deck.addCard(req.body, {Deck_Components})
+		.then(result => res.json(result));
+});
+
+router.post('/remove-card', (req, res) => {
+	Deck.removeCard(req.body, {Deck_Components})
+		.then(result => res.json(result));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
