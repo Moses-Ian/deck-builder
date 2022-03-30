@@ -16,14 +16,18 @@ Deck_Components.init(
         },
         deck_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'deck',
+                key: 'id'
+            }
         }
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'card'  
+        modelName: 'deck_components'  
     }
 )
 
