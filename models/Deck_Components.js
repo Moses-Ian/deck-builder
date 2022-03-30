@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Card extends Model { }
+class Deck_Components extends Model { }
 
-Card.init(
+Deck_Components.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,6 +11,10 @@ Card.init(
             autoIncrement: true
         },
         multiverseId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        deck_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
@@ -23,5 +27,4 @@ Card.init(
     }
 )
 
-
-module.exports = Card;
+module.exports = Deck_Components;
