@@ -9,7 +9,7 @@ INSERT INTO user
 
     -- decks
 INSERT INTO deck 
-    (name, owner_id)
+    (name, user_id)
     VALUES
     ("this deck", 1),
     ("someOther Deck", 2),
