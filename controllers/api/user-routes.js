@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Deck } = require('../../models');
 const { withAuth, writeAuth } = require('../../utils/auth');
 
 // GET /api/users
@@ -20,13 +20,13 @@ router.get('/:id', (req, res) => {
 		attributes: { exclude: ['password'] },
 		where: {
 			id: req.params.id
-		}
-    // include: [
-			// {
-				// model: Deck,
-				// attributes: []
-			// },
-		// ]
+		},
+    include: [
+			{
+				model: Deck,
+				attributes: ['id', 'name']
+			},
+		]
 	})
 		.then(dbUserData => {
 			if (!dbUserData) {
