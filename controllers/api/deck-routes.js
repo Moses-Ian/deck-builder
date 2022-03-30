@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Deck } = require('../../models');
+const { User, Deck } = require('../../models');
 const { withAuth } = require('../../utils/auth');
 
 // GET /api/decks
@@ -17,13 +17,17 @@ router.get('/:id', (req, res) => {
 	Deck.findOne({
 		where: {
 			id: req.params.id
-		}
-    // include: [
-			// {
-				// model: User,
-				// attributes: []
-			// },
-		// ]
+		},
+		attributes: [
+			'id',
+			'name'
+		],
+    include: [
+			{
+				model: User,
+				attributes: ['id', 'username']
+			},
+		]
 	})
 		.then(dbDeckData => {
 			if (!dbDeckData) {
