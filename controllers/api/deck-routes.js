@@ -73,7 +73,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/decks
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
   Deck.create(req.body)
     .then(dbDeckData => res.json(dbDeckData))
     .catch(err => {

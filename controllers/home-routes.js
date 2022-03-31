@@ -9,7 +9,11 @@ router.get('/', (req, res) => {
 				model: User,
 				attributes: ['id', 'username']
 			}
-		]
+		],
+		order: [
+			['created_at', 'DESC']
+		],
+		limit: 20
 	})
 		.then(dbDeckData => {
 			const decks = dbDeckData.map(deck => deck.get({ plain: true }));
