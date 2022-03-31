@@ -1,9 +1,29 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-// const { Post, User, Comment } = require('../models');
+const { User, Deck } = require('../models');
 
 router.get('/', (req, res) => {
-	res.render('homepage');
+  Deck.findAll({
+		include: [
+			{
+				model: User,
+				attributes: ['id', 'username']
+			}
+		]
+	})
+		.then(dbDeckData => {
+			const decks = dbDeckData.map(deck => deck.get({ plain: true }));
+			res.render('homepage', {
+				decks,
+				loggedIn: req.session.loggedIn
+			});
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(500).json(err);
+		});
+
+
 	
 	
 	

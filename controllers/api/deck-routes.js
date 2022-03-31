@@ -5,7 +5,14 @@ const { withAuth } = require('../../utils/auth');
 
 // GET /api/decks
 router.get('/', (req, res) => {
-  Deck.findAll()
+  Deck.findAll({
+		include: [
+			{
+				model: User,
+				attributes: ['id', 'username']
+			}
+		]
+	})
 		.then(dbDeckData => res.json(dbDeckData))
 		.catch(err => {
 			console.log(err);
