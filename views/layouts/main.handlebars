@@ -18,9 +18,14 @@
 				{{#if loggedIn}}
 				<a href="/dashboard">dashboard</a>
 				<button id="logout" class="btn-no-style">logout</button>
-				{{else}}
-				<a href="/login">login</a>
 				{{/if}}
+				<div id='login'>
+					<form id='login-form'>
+						<input type='text' id='login-email' placeholder='email' />
+						<input type='text' id='login-password' placeholder='password' />
+						<button type='submit'>login</button>
+					</form>
+				</div>
 				<a href='/register'>register</a>
 			</nav>
     </header>
@@ -31,10 +36,7 @@
       Thanks for visiting!
     </footer>
   </div>
-
-	{{#if loggedIn}}
-	<script src="/js/logout.js"></script>
-	{{/if}}
+	<script src="/js/login.js"></script>
 </body>
 
 </html>
