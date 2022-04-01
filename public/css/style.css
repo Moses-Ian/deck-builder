@@ -16,3 +16,20 @@
   color: #3486eb;
 }
 
+#deck-builder-view {
+	display: flex;
+}
+
+#card-view {
+	flex-grow: 5;
+}
+
+#card-view {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#deck-view {
+	flex-grow: 1;
+	flex-basis: fit-content;
+}

@@ -1,11 +1,11 @@
 <section>
+	<a href='/build/new'>Make a New Deck</a>
   <h2>Your Decks</h2>
-	<h3>Your name is {{data.username}}</h3>
 {{#if data.decks.length}}
   <ol>
     {{#each data.decks as |deck|}}
     <li>
-      {{> deck-info deck}}
+      {{> deck-info-build deck}}
     </li>
     {{/each}}
   </ol>

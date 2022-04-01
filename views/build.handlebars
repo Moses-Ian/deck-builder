@@ -1,0 +1,20 @@
+<form id='search-card-form'>
+	<input type='text' id='search-card-input' placeholder='Search...' />
+</form>
+
+<div id='deck-builder-view'>
+	<section id='card-view'>
+		{{#each cards as |card|}}
+		<img src='{{card.imageUrl}}' />
+		{{/each}}
+	</section>
+
+	<section id='deck-view'>
+		<ol>
+			<li><h3>{{deck.name}}</h3></li>
+			{{#each deck.cards as |card|}}
+			<li>{{card.name}}</li>
+			{{/each}}
+		</ol>
+	</section>
+</div>
