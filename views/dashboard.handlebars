@@ -1,8 +1,9 @@
 <section>
   <h2>Your Decks</h2>
-{{#if decks.length}}
+	<h3>Your name is {{data.username}}</h3>
+{{#if data.decks.length}}
   <ol>
-    {{#each decks as |deck|}}
+    {{#each data.decks as |deck|}}
     <li>
       {{> deck-info deck}}
     </li>

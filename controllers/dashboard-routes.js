@@ -4,22 +4,28 @@ const { User, Deck, Deck_Components } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
-	console.log(req.session);
+	// console.log(req.session);
 	User.findOne({
 		where: {
 			id: req.session.user_id
 		},
 		include: [
 			{
-				model: Deck
+				model: Deck,
+				include: [	//this is silly as shit, but it's the best way to get the data I need
+					{
+						model: User,
+						attributes: ['username']
+					}
+				]
 			}
 		]
 	})
 		.then(dbUserData => {
-			console.log(dbUserData);
+			// console.log(dbUserData);
 			const data = dbUserData.get({ plain: true });
+			console.log(data);
 			res.render('dashboard', {
-				username: data.username,
 				data,
 				loggedIn: req.session.loggedIn
 			});
