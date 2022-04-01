@@ -1,0 +1,14 @@
+<section>
+  <h2>Your Decks</h2>
+{{#if decks.length}}
+  <ol>
+    {{#each decks as |deck|}}
+    <li>
+      {{> deck-info deck}}
+    </li>
+    {{/each}}
+  </ol>
+{{else}}
+	<p>You have no decks.</p>
+{{/if}}
+</section>
