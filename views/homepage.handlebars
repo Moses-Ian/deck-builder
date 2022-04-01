@@ -1,0 +1,17 @@
+<div>
+	<a href='/build'>Make a New Deck</a>
+	<form id='search-decks'>
+		<input type='text' id='search-decks-input' placeholder='Search for decks by name, card, user...' />
+	</form>
+</div>
+
+<div>
+	<h3>Latest Decks</h3>
+	<ul class='deck-list'>
+		{{#each decks as |deck|}}
+		<li>
+			{{> deck-info deck}}
+		</li>
+		{{/each}}
+	</ul>
+</div>

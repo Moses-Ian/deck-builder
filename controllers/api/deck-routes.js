@@ -5,7 +5,14 @@ const { withAuth } = require('../../utils/auth');
 
 // GET /api/decks
 router.get('/', (req, res) => {
-  Deck.findAll()
+  Deck.findAll({
+		include: [
+			{
+				model: User,
+				attributes: ['id', 'username']
+			}
+		]
+	})
 		.then(dbDeckData => res.json(dbDeckData))
 		.catch(err => {
 			console.log(err);
@@ -46,11 +53,7 @@ router.get('/:id', (req, res) => {
 			}
 			// res.json(dbDeckData);
 			//get the cards from mtg based on the multiverse ids
-			let resObj = {
-				id:   dbDeckData.id,
-				name: dbDeckData.name,
-				user: dbDeckData.user
-			};
+			let resObj = dbDeckData.get({ plain: true });
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
 			console.log(id_arr);
 			mtg.card.where({multiverseid: id_arr})
@@ -66,7 +69,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/decks
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
   Deck.create(req.body)
     .then(dbDeckData => res.json(dbDeckData))
     .catch(err => {
