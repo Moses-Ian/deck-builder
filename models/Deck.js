@@ -9,8 +9,23 @@ class Deck extends Model {
 		});
 	}
 	
-	static removeCard(body, models) {
-		//todo
+	static async removeCard(body, models) {
+		//this version deletes all copies from the deck
+		// return models.Deck_Components.destroy({
+			// where: {
+				// multiverseId: body.multiverseId,
+				// deck_id: body.deck_id
+			// }
+		// });
+		
+		//this version deletes one copy from the deck
+		const cardToRemove = await models.Deck_Components.findOne({
+			where: {
+				multiverseId: body.multiverseId,
+				deck_id: body.deck_id
+			}
+		});
+		return cardToRemove.destroy();
 	}
 }
 
