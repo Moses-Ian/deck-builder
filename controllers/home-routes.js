@@ -19,19 +19,17 @@ router.get('/', (req, res) => {
 	})
 		.then(dbDeckData => {
 			const decks = dbDeckData.map(deck => deck.get({ plain: true }));
+			const username = req.session.username || null;
 			res.render('homepage', {
 				decks,
-				loggedIn: req.session.loggedIn
+				loggedIn: req.session.loggedIn,
+				username
 			});
 		})
 		.catch(err => {
 			console.log(err);
 			res.status(500).json(err);
 		});
-});
-
-router.get('/login', (req, res) => {
-  // res.render('login');
 });
 
 router.get('/deck/:id', (req, res) => {
@@ -69,13 +67,15 @@ router.get('/deck/:id', (req, res) => {
 			let deck = dbDeckData.get({ plain: true });
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
 			console.log(id_arr);
+			const username = req.session.username || null;
 			mtg.card.where({multiverseid: id_arr})
 				.then(cards => {
 					deck.cards = cards;
 					// res.json(deck);
 					res.render('single-deck', {
 						deck,
-						loggedIn: req.session.loggedIn
+						loggedIn: req.session.loggedIn,
+						username
 					});
 				});
 		})
@@ -83,72 +83,18 @@ router.get('/deck/:id', (req, res) => {
 			console.log(err);
 			res.status(500).json(err);
 		});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-  // Post.findOne({
-    // where: {
-      // id: req.params.id
-    // },
-    // attributes: [
-      // 'id',
-      // 'post_url',
-      // 'title',
-      // 'created_at',
-      // [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-    // ],
-    // include: [
-      // {
-        // model: Comment,
-        // attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        // include: {
-          // model: User,
-          // attributes: ['username']
-        // }
-      // },
-      // {
-        // model: User,
-        // attributes: ['username']
-      // }
-    // ]
-  // })
-    // .then(dbPostData => {
-      // if (!dbPostData) {
-        // res.status(404).json({ message: 'No post found with this id' });
-        // return;
-      // }
+});
 
-      // serialize the data
-      // const post = dbPostData.get({ plain: true });
+router.get('/login', (req, res) => {
+  // res.render('login');
+});
 
-      // pass data to template
-      // res.render('single-post', { 
-				// post,
-				// loggedIn:	req.session.loggedIn
-			// });
-    // })
-    // .catch(err => {
-      // console.log(err);
-      // res.status(500).json(err);
-    // });
+router.get('/register', (req, res) => {
+	const username = req.session.username || null;
+	res.render('register', {
+		username,
+		loggedIn: req.session.loggedIn,
+	});
 });
 
 module.exports = router;
