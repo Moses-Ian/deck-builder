@@ -14,6 +14,9 @@
       <h1>
         <a href="/">Deck Builder</a>
       </h1>
+			{{#if loggedIn}}
+			<p>Welcome, {{username}}!</p>
+			{{/if}}
 			<nav>
 				{{#if loggedIn}}
 				<a href="/dashboard">dashboard</a>
@@ -37,6 +40,9 @@
     </footer>
   </div>
 	<script src="/js/login.js"></script>
+	{{#if loggedIn}}
+		<script src='/js/logout.js'></script>
+	{{/if}}
 </body>
 
 </html>

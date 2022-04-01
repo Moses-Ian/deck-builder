@@ -19,9 +19,11 @@ router.get('/', (req, res) => {
 	})
 		.then(dbDeckData => {
 			const decks = dbDeckData.map(deck => deck.get({ plain: true }));
+			const username = req.session.username || null;
 			res.render('homepage', {
 				decks,
-				loggedIn: req.session.loggedIn
+				loggedIn: req.session.loggedIn,
+				username
 			});
 		})
 		.catch(err => {
@@ -65,13 +67,15 @@ router.get('/deck/:id', (req, res) => {
 			let deck = dbDeckData.get({ plain: true });
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
 			console.log(id_arr);
+			const username = req.session.username || null;
 			mtg.card.where({multiverseid: id_arr})
 				.then(cards => {
 					deck.cards = cards;
 					// res.json(deck);
 					res.render('single-deck', {
 						deck,
-						loggedIn: req.session.loggedIn
+						loggedIn: req.session.loggedIn,
+						username
 					});
 				});
 		})
@@ -86,7 +90,10 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-	res.render('register');
+	const username = req.session.username || null;
+	res.render('register', {
+		username
+	});
 });
 
 module.exports = router;
