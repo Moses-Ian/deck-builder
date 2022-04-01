@@ -14,9 +14,11 @@ async function loginFormHandler(event) {
       headers: { 'Content-Type': 'application/json' }
     });
 
+	
     if (response.ok) {
-      document.location.reload();
+      // window.location.href;
       // document.location.replace('/');
+			setTimeout(() => document.location.reload(), 10);
     } else {
       alert(response.statusText);
     }

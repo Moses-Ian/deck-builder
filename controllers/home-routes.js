@@ -92,7 +92,8 @@ router.get('/login', (req, res) => {
 router.get('/register', (req, res) => {
 	const username = req.session.username || null;
 	res.render('register', {
-		username
+		username,
+		loggedIn: req.session.loggedIn,
 	});
 });
 
