@@ -79,7 +79,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT /api/decks/1
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
 	//need to ensure the user owns this deck
   Deck.update(req.body, {
     where: {
@@ -100,7 +100,7 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 // DELETE /api/decks/1
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
 	//need to ensure the user owns this deck
   Deck.destroy({
     where: {
