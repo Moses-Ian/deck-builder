@@ -1,0 +1,15 @@
+<section>
+	<a href='/build/new'>Make a New Deck</a>
+  <h2>Your Decks</h2>
+{{#if data.decks.length}}
+  <ol>
+    {{#each data.decks as |deck|}}
+    <li>
+      {{> deck-info-build deck}}
+    </li>
+    {{/each}}
+  </ol>
+{{else}}
+	<p>You have no decks.</p>
+{{/if}}
+</section>

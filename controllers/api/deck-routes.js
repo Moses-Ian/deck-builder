@@ -5,7 +5,14 @@ const { withAuth } = require('../../utils/auth');
 
 // GET /api/decks
 router.get('/', (req, res) => {
-  Deck.findAll()
+  Deck.findAll({
+		include: [
+			{
+				model: User,
+				attributes: ['id', 'username']
+			}
+		]
+	})
 		.then(dbDeckData => res.json(dbDeckData))
 		.catch(err => {
 			console.log(err);
@@ -39,13 +46,16 @@ router.get('/:id', (req, res) => {
 				res.status(404).json({ message: 'No deck found with this id' });
 				return;
 			}
+			// console.log(dbDeckData);
+			if (dbDeckData.deck_components.length == 0) {
+				res.json(dbDeckData);
+				return;
+			}
+			// res.json(dbDeckData);
 			//get the cards from mtg based on the multiverse ids
-			let resObj = {
-				id:   dbDeckData.id,
-				name: dbDeckData.name,
-				user: dbDeckData.user
-			};
-			const id_arr = dbDeckData.cards.map(card => card.multiverseId).join(',');
+			let resObj = dbDeckData.get({ plain: true });
+			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
+			console.log(id_arr);
 			mtg.card.where({multiverseid: id_arr})
 				.then(cards => {
 					resObj.cards = cards;
@@ -69,7 +79,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT /api/decks/1
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
 	//need to ensure the user owns this deck
   Deck.update(req.body, {
     where: {
@@ -90,7 +100,7 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 // DELETE /api/decks/1
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
 	//need to ensure the user owns this deck
   Deck.destroy({
     where: {
@@ -112,12 +122,20 @@ router.delete('/:id', withAuth, (req, res) => {
 
 router.post('/add-card', (req, res) => {
 	Deck.addCard(req.body, {Deck_Components})
-		.then(result => res.json(result));
+		.then(result => res.json(result))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.post('/remove-card', (req, res) => {
 	Deck.removeCard(req.body, {Deck_Components})
-		.then(result => res.json(result));
+		.then(result => res.json(result))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 

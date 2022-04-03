@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deck Builder</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>
+        <a href="/">Deck Builder</a>
+      </h1>
+			{{#if loggedIn}}
+			<p>Welcome, {{username}}!</p>
+			{{/if}}
+			<nav>
+				{{#if loggedIn}}
+				<a href="/dashboard">dashboard</a>
+				<button id="logout" class="btn-no-style">logout</button>
+				{{/if}}
+				<div id='login'>
+					<form id='login-form'>
+						<input type='text' id='login-email' placeholder='email' />
+						<input type='text' id='login-password' placeholder='password' />
+						<button type='submit'>login</button>
+					</form>
+				</div>
+				<a href='/register'>register</a>
+			</nav>
+    </header>
+    <main>
+      {{{ body }}}
+    </main>
+    <footer>
+      Thanks for visiting!
+    </footer>
+  </div>
+	<script src="/js/login.js"></script>
+	{{#if loggedIn}}
+		<script src='/js/logout.js'></script>
+	{{/if}}
+</body>
+
+</html>

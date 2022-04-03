@@ -1,0 +1,22 @@
+<form id='search-card-form'>
+	<input type='text' id='search-card-input' placeholder='Search...' />
+</form>
+
+<div id='deck-builder-view'>
+	<section id='card-view'>
+		{{#each cards as |card|}}
+		<img src='{{card.imageUrl}}' data-multiverseId='{{card.multiverseid}}' />
+		{{/each}}
+	</section>
+
+	<section id='deck-view'>
+		<h3 id='deck-name'>{{deck.name}}</h3>
+		<ul id='card-list'>
+			{{#each deck.cards as |card|}}
+			<li data-multiverseId='{{card.multiverseid}}'>{{card.name}}</li>
+			{{/each}}
+		</ul>
+	</section>
+</div>
+
+<script src='/js/build-script.js'></script>
