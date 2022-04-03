@@ -9,8 +9,10 @@ const deckViewEl = document.querySelector('#deck-view');
 //functions
 //====================================
 function getId() {
-	const loc = document.location.href.split('/');
-	return loc[loc.length-1];
+	let loc = document.location.href.split('/');
+	loc = loc[loc.length-1].split('?');
+	console.log(loc[0]);
+	return loc[0];
 }
 
 async function addCard(event) {
@@ -92,12 +94,22 @@ function updateName(event) {
 	})
 }
 
+function search(event) {
+	event.preventDefault();
+	const query = document.querySelector('#search-card-input').value.trim();
+	window.location.href = `/build/${getId()}?search=${query}`;
+}
+
+
+
+
+
 //listeners
 //=====================================
 document.querySelector('#card-view').addEventListener('click', addCard);
 document.querySelector('#card-list').addEventListener('click', removeCard);
 document.querySelector('#deck-name').addEventListener('click', editName);
-
+document.querySelector('#search-card-form').addEventListener('submit', search);
 
 
 

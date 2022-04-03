@@ -21,6 +21,22 @@ router.get('/new', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+	//i'm getting a weird bug where the query param is ?search instead of search
+	// console.log(req.originalUrl);
+	// console.log(req.params.id);
+	// console.log(decodeURIComponent(req.query));
+	
+	const search = req.query.search;
+	let whereObj = {
+			page: 1,
+			// pageSize: 20
+			pageSize: 5	//limit this because my internet sucks while i'm testing
+		}
+	if (search) {
+		whereObj.name = search;
+		// whereObj.text = search;	//this ands them together
+	}
+	
 	// make the deck, then show a basic search result
 	Promise.all([
 		//chain 1
@@ -55,11 +71,7 @@ router.get('/:id', (req, res) => {
 		
 		
 		//chain 2
-		mtg.card.where({
-			page: 1,
-			// pageSize: 20
-			pageSize: 5	//limit this because my internet sucks while i'm testing
-		})
+		mtg.card.where(whereObj)
 	])
     .then(([dbDeckData, cards]) => {
 			// console.log(dbDeckData);
