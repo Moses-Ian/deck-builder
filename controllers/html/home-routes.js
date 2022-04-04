@@ -86,6 +86,7 @@ router.get('/deck/:id', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+	console.log('login route');
   // res.render('login');
 });
 
