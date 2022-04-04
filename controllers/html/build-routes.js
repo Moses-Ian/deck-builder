@@ -2,7 +2,9 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { User, Deck, Deck_Components } = require('../../models');
 const mtg = require('mtgsdk');
-const withAuth = require('../../utils/auth');
+const {withAuth, writeAuth} = require('../../utils/auth');
+
+router.use(withAuth);
 
 router.get('/new', (req, res) => {
 	console.log('got here');

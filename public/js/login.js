@@ -20,6 +20,7 @@ async function loginFormHandler(event) {
       // document.location.replace('/');
 			setTimeout(() => document.location.reload(), 10);
     } else {
+			console.log(response);
       alert(response.statusText);
     }
   }
