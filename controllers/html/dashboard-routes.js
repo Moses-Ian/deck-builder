@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { User, Deck, Deck_Components } = require('../../models');
-const withAuth = require('../../utils/auth');
+const {withAuth} = require('../../utils/auth');
+
+router.use(withAuth);
 
 router.get('/', (req, res) => {
-	// console.log(req.session);
 	User.findOne({
 		where: {
 			id: req.session.user_id
@@ -24,7 +25,6 @@ router.get('/', (req, res) => {
 		.then(dbUserData => {
 			// console.log(dbUserData);
 			const data = dbUserData.get({ plain: true });
-			console.log(data);
 			res.render('dashboard', {
 				data,
 				loggedIn: req.session.loggedIn

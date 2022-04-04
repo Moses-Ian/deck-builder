@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Deck, Deck_Components } = require('../../models');
 const mtg = require('mtgsdk');
-const { withAuth } = require('../../utils/auth');
+const { withAuth, deckAuth } = require('../../utils/auth');
 
 // GET /api/decks
 router.get('/', (req, res) => {
@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/decks
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
   Deck.create(req.body)
     .then(dbDeckData => res.json(dbDeckData))
     .catch(err => {
@@ -79,7 +79,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT /api/decks/1
-router.put('/:id', (req, res) => {
+router.put('/:id', [withAuth, deckAuth], (req, res) => {
 	//need to ensure the user owns this deck
   Deck.update(req.body, {
     where: {
@@ -100,7 +100,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE /api/decks/1
-router.delete('/:id', (req, res) => {
+router.delete('/:id', [withAuth, deckAuth], (req, res) => {
 	//need to ensure the user owns this deck
   Deck.destroy({
     where: {
@@ -120,7 +120,9 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.post('/add-card', (req, res) => {
+router.post('/add-card', [withAuth, deckAuth], (req, res) => {
+	console.log(req.session);
+	console.log(req.body);
 	Deck.addCard(req.body, {Deck_Components})
 		.then(result => res.json(result))
     .catch(err => {
@@ -129,7 +131,7 @@ router.post('/add-card', (req, res) => {
     });
 });
 
-router.post('/remove-card', (req, res) => {
+router.post('/remove-card', [withAuth, deckAuth], (req, res) => {
 	Deck.removeCard(req.body, {Deck_Components})
 		.then(result => res.json(result))
     .catch(err => {

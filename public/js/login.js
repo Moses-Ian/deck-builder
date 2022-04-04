@@ -20,10 +20,11 @@ async function loginFormHandler(event) {
       // document.location.replace('/');
 			setTimeout(() => document.location.reload(), 10);
     } else {
+			console.log(response);
       alert(response.statusText);
     }
   }
 }
 
-document.querySelector('#login-form').addEventListener('submit', loginFormHandler);
+document.querySelector('#login-button').addEventListener('click', loginFormHandler);
 

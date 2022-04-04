@@ -15,11 +15,12 @@ router.get('/', (req, res) => {
 		order: [
 			['created_at', 'DESC']
 		],
-		limit: 20
+		limit: 8
 	})
 		.then(dbDeckData => {
 			const decks = dbDeckData.map(deck => deck.get({ plain: true }));
 			const username = req.session.username || null;
+			console.log(decks);
 			res.render('homepage', {
 				decks,
 				loggedIn: req.session.loggedIn,
@@ -86,6 +87,7 @@ router.get('/deck/:id', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+	console.log('login route');
   // res.render('login');
 });
 
