@@ -33,10 +33,6 @@ router.get('/', (req, res) => {
 		});
 });
 
-router.get('/decks', (req,res) => {
-	res.render('decks')
-})
-
 router.get('/deck/:id', (req, res) => {
 	Deck.findOne({
 		where: {

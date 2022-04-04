@@ -4,12 +4,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.header {
-  background-color: darkolivegreen;
-}
+
 #navbarNav {
   justify-content: space-between;
 }
+
 .btn-no-style {
   background: none;
   border: none;
