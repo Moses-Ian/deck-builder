@@ -53,8 +53,11 @@
 							</li>
 						</ul>
 						{{else}}
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+						<div>
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal"
 							data-bs-target="#login-modal">login</button>
+							<button type='button' class='btn btn-info' onclick="location.href='/register';">Register</button>
+						</div>
 						<div class="modal fade" id="login-modal" tabindex="-1">
 							<div class="modal-dialog">
 								<div class="modal-content">
