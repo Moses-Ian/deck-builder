@@ -5,7 +5,7 @@
 <div id='deck-builder-view'>
 	<section id='card-view'>
 		{{#each cards as |card|}}
-		<img src='{{card.imageUrl}}' data-multiverseId='{{card.multiverseid}}' />
+		<img src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}' />
 		{{/each}}
 	</section>
 
@@ -13,7 +13,7 @@
 		<h3 id='deck-name'>{{deck.name}}</h3>
 		<ul id='card-list'>
 			{{#each deck.cards as |card|}}
-			<li data-multiverseId='{{card.multiverseid}}'>{{card.name}}</li>
+			<li data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>{{card.name}}</li>
 			{{/each}}
 		</ul>
 	</section>
