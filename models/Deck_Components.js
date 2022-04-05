@@ -16,7 +16,8 @@ Deck_Components.init(
         },
         imageUrl: {
             type: DataTypes.STRING,
-            allowNull: false,
+						defaultValue: "/images/card-back.jpg",
+            allowNull: false
         },
         deck_id: {
             type: DataTypes.INTEGER,

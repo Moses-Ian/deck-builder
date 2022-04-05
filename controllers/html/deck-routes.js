@@ -78,7 +78,10 @@ router.get('/', (req, res) => {
 		.then(dbDeckData => {
 			const decks = dbDeckData.map(deck => {
 				const deckData = deck.get({ plain: true })
-				deckData.imageUrl = deckData.deck_components[0]?.imageUrl || "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=1014&type=card"
+				if( !deckData.deck_components[0] )
+					deckData.imageUrl = "/images/card-back.jpg";
+				else
+					deckData.imageUrl = deckData.deck_components[0].imageUrl;
 				return deckData;
 			});
 			const username = req.session.username || null;
