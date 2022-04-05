@@ -10,6 +10,10 @@ router.get('/', (req, res) => {
 			{
 				model: User,
 				attributes: ['id', 'username']
+			},
+			{
+				model: Deck_Components,
+				attributes: ['imageUrl']
 			}
 		],
 		order: [
@@ -18,7 +22,12 @@ router.get('/', (req, res) => {
 		limit: 8
 	})
 		.then(dbDeckData => {
-			const decks = dbDeckData.map(deck => deck.get({ plain: true }));
+			const decks = dbDeckData.map(deck => {
+				const deckData = deck.get({ plain: true })
+				deckData.imageUrl = deckData.deck_components[0]?.imageUrl || "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=1014&type=card"
+				console.log(deckData);
+				return deckData;
+			});
 			const username = req.session.username || null;
 			console.log(decks);
 			res.render('homepage', {

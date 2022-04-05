@@ -14,6 +14,10 @@ Deck_Components.init(
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        imageUrl: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         deck_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

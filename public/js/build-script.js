@@ -17,6 +17,7 @@ function getId() {
 
 async function addCard(event) {
 	const multiverseId = event.target.dataset.multiverseid;
+	const imageUrl = event.target.dataset.imageurl;
 	if (!multiverseId)
 		return;
 	
@@ -25,6 +26,7 @@ async function addCard(event) {
 		method: 'POST',
 		body: JSON.stringify({
 			multiverseId,
+			imageUrl,
 			deck_id: getId()
 		}),
 		headers: {
