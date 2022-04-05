@@ -5,7 +5,8 @@ class Deck extends Model {
 	static addCard(body, models) {
 		return models.Deck_Components.create({
 			multiverseId: body.multiverseId,
-			deck_id: body.deck_id
+			deck_id: body.deck_id,
+			imageUrl: body.imageUrl
 		});
 	}
 	
