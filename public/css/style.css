@@ -1,3 +1,5 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
 body {
   background-color: black !important;
   background-image: url('/images/background.jpg');
@@ -43,4 +45,8 @@ body {
 #deck-view {
 	flex-grow: 1;
 	flex-basis: fit-content;
+}
+
+p small {
+	font-size: 12px;
 }
