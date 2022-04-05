@@ -17,6 +17,7 @@ const writeAuth = (req, res, next) => {
 }
 
 const deckAuth = (req, res, next) => {
+	
 	return Deck.findOne({
 		where: {
 			id: req.body.deck_id
@@ -34,7 +35,8 @@ const deckAuth = (req, res, next) => {
 			if (dbDeckData.user_id != req.session.user_id) 
 				return;
 			next();
-		});
+		})
+		.catch(err => console.error(err));
 }
 
 module.exports =

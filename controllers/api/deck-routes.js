@@ -80,6 +80,7 @@ router.post('/', withAuth, (req, res) => {
 
 // PUT /api/decks/1
 router.put('/:id', [withAuth, deckAuth], (req, res) => {
+	// console.log('api/decks/:id');
 	//need to ensure the user owns this deck
 	Deck.update(req.body, {
 		where: {
