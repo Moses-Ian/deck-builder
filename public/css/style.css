@@ -1,4 +1,4 @@
-@import '~mdb-ui-kit/css/mdb.min.css';
+/* @import '~mdb-ui-kit/css/mdb.min.css'; */
 
 body {
   background-color: black !important;
@@ -46,8 +46,19 @@ body {
 #deck-view {
 	flex-grow: 1;
 	flex-basis: fit-content;
+	margin-right: 5px;
 }
 
 p small {
 	font-size: 12px;
+}
+
+#card-list li:hover {
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+}
+
+#card-list li:active {
+	background-color: #003b88;
 }

@@ -1,6 +1,6 @@
 //variables
 //==================================
-const deckViewEl = document.querySelector('#deck-view');
+const cardListEl = document.querySelector('#card-list');
 
 
 
@@ -11,7 +11,6 @@ const deckViewEl = document.querySelector('#deck-view');
 function getId() {
 	let loc = document.location.href.split('/');
 	loc = loc[loc.length-1].split('?');
-	console.log(loc[0]);
 	return loc[0];
 }
 
@@ -21,7 +20,6 @@ async function addCard(event) {
 	if (!multiverseId)
 		return;
 	
-	// console.log(loc[loc.length-1]);
 	const response = await fetch('/api/decks/add-card', {
 		method: 'POST',
 		body: JSON.stringify({
@@ -42,6 +40,8 @@ async function addCard(event) {
 };
 
 async function removeCard(event) {
+	if (event.target.tagName === 'H3')
+		return;
 	const multiverseId = event.target.dataset.multiverseid;
 	const response = await fetch('/api/decks/remove-card', {
 		method: 'POST',
@@ -71,7 +71,7 @@ function editName(event) {
 	textInput.addEventListener('blur', updateName);
 	
 	nameH3.remove();
-	deckViewEl.prepend(textInput);
+	cardListEl.prepend(textInput);
 	textInput.focus();
 }
 
@@ -81,14 +81,18 @@ function updateName(event) {
 	
 	const nameH3 = document.createElement('h3');
 	nameH3.textContent = newName;
+	nameH3.classList.add('list-group-item', 'mb-0');
 	nameH3.addEventListener('click', editName);
 	nameInput.remove();
-	deckViewEl.prepend(nameH3);
+	cardListEl.prepend(nameH3);
 	
-	fetch(`/api/decks/${getId()}`, {
+	const deck_id = getId();
+	
+	fetch(`/api/decks/${deck_id}`, {
 		method: 'PUT',
 		body: JSON.stringify({
-			name: newName
+			name: newName,
+			deck_id
 		}),
 		headers: {
       'Content-Type': 'application/json'
