@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 		order: [
 			['created_at', 'DESC']
 		],
-		limit: 8
+		limit: 12
 	})
 		.then(dbDeckData => {
 			const decks = dbDeckData.map(deck => {

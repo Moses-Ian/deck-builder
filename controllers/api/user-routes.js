@@ -130,7 +130,7 @@ router.post('/login', (req, res) => {
       res.json({ user: dbUserData, message: 'You are now logged in!' });
 			// res.redirect('back');
 			// res.redirect(req.get('referrer'));
-			// res.redirect('/');
+			res.redirect('/');
     });
   });
 });
