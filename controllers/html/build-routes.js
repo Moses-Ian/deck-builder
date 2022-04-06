@@ -7,7 +7,7 @@ const { withAuth, writeAuth } = require('../../utils/auth');
 router.use(withAuth);
 
 router.get('/new', (req, res) => {
-	console.log('got here');
+	// console.log('got here');
 	Deck.create({
 		name: 'Deck Name',
 		user_id: req.session.user_id
@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
 	const search = req.query.search;
 	let whereObj = {
 		page: 1,
-		// pageSize: 20
+		// pageSize: 24
 		pageSize: 5	//limit this because my internet sucks while i'm testing
 	}
 	if (search) {

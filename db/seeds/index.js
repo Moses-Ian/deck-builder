@@ -1,3 +1,8 @@
+//how to seed heroku
+//heroku run node db/seeds.js
+
+
+
 const sequelize = require('../../config/connection');
 const seedUser = require('./userData');
 const seedDecks = require('./deckData');

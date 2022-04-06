@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
 			//get the cards from mtg based on the multiverse ids
 			let deck = dbDeckData.get({ plain: true });
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
-			console.log(id_arr);
+			// console.log(id_arr);
 			const username = req.session.username || null;
 			mtg.card.where({ multiverseid: id_arr })
 				.then(cards => {
