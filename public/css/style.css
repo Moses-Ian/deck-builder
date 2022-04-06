@@ -1,0 +1,128 @@
+/* @import '~mdb-ui-kit/css/mdb.min.css'; */
+
+body {
+  background-color: black !important;
+  background-image: url('/images/background.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#navbarNav {
+  justify-content: space-between;
+}
+
+.btn-no-style {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #225ca3;
+  font-size: 100%;
+  font-weight: bold;
+  transition: color .1s;
+  margin-left: 16px;
+}
+
+.btn-no-style:hover {
+  background: none;
+  color: #3486eb;
+}
+
+#deck-builder-view {
+	display: flex;
+}
+
+#card-view {
+	flex-grow: 5;
+}
+
+#card-view {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#deck-view {
+	flex-grow: 1;
+	flex-basis: fit-content;
+	margin-right: 5px;
+}
+
+p small {
+	font-size: 12px;
+}
+
+#card-list li:hover {
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+}
+
+#card-list li:active {
+	background-color: #003b88;
+}
+
+footer {
+	margin-top: 400px;
+}
+
+.card {
+	max-width: 400px;
+}
+
+/* // Extra small devices (portrait phones, less than 576px) */
+/* // No media query since this is the default in Bootstrap */
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	
+	
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	
+	
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	
+	
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

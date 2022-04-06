@@ -1,0 +1,16 @@
+{{> deck-info deck}}
+
+<ul id='card-title-list'>
+	{{#each deck.cards as |card|}}
+	<li>{{card.name}}</li>
+	{{/each}}
+</ul>
+
+<ul id='card-images'>
+	{{#each deck.cards as |card|}}
+	<li>
+		<img src='{{imageUrl}}' alt='{{card.name}}'/>
+	</li>
+	{{/each}}
+</ul>
+
