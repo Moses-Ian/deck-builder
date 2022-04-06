@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
 	let whereObj = {
 		page: 1,
 		// pageSize: 20
-		pageSize: 5	//limit this because my internet sucks while i'm testing
+		pageSize: 20	//limit this because my internet sucks while i'm testing
 	}
 	if (search) {
 		whereObj.name = search;
