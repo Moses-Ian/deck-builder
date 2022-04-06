@@ -62,3 +62,7 @@ p small {
 #card-list li:active {
 	background-color: #003b88;
 }
+
+footer {
+	margin-top: 400px;
+}
