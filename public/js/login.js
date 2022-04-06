@@ -18,7 +18,7 @@ async function loginFormHandler(event) {
     if (response.ok) {
       // window.location.href;
       // document.location.replace('/');
-			setTimeout(() => document.location.reload(), 10);
+			setTimeout(() => document.location.href = '/', 10);
     } else {
 			console.log(response);
       alert(response.statusText);
