@@ -28,11 +28,11 @@ router.get('/', (req, res) => {
 					deckData.imageUrl = "/images/card-back.jpg";
 				else
 					deckData.imageUrl = deckData.deck_components[0].imageUrl;
-				console.log(deckData);
+				// console.log(deckData);
 				return deckData;
 			});
 			const username = req.session.username || null;
-			console.log(decks);
+			// console.log(decks);
 			res.render('homepage', {
 				decks,
 				loggedIn: req.session.loggedIn,
@@ -79,7 +79,7 @@ router.get('/deck/:id', (req, res) => {
 			//get the cards from mtg based on the multiverse ids
 			let deck = dbDeckData.get({ plain: true });
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
-			console.log(id_arr);
+			// console.log(id_arr);
 			const username = req.session.username || null;
 			mtg.card.where({multiverseid: id_arr})
 				.then(cards => {

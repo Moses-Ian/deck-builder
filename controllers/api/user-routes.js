@@ -127,7 +127,7 @@ router.post('/login', (req, res) => {
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
 
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
+      // res.json({ user: dbUserData, message: 'You are now logged in!' });
 			// res.redirect('back');
 			// res.redirect(req.get('referrer'));
 			res.redirect('/');
