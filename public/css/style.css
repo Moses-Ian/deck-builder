@@ -30,7 +30,7 @@ body {
   color: #3486eb;
 }
 
-#deck-builder-view {
+/* #deck-builder-view {
 	display: flex;
 }
 
@@ -47,7 +47,7 @@ body {
 	flex-grow: 1;
 	flex-basis: fit-content;
 	margin-right: 5px;
-}
+} */
 
 p small {
 	font-size: 12px;
