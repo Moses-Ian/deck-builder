@@ -40,9 +40,10 @@ async function addCard(event) {
 };
 
 async function removeCard(event) {
-	if (event.target.tagName === 'H3')
+	if (event.target.tagName === 'H3'|| event.target.tagName === 'P')
 		return;
 	const multiverseId = event.target.dataset.multiverseid;
+	console.log(event.target.dataset);
 	const response = await fetch('/api/decks/remove-card', {
 		method: 'POST',
 		body: JSON.stringify({
