@@ -70,8 +70,10 @@ router.get('/:id', (req, res) => {
 					return;
 				}
 				let resObj = dbDeckData.get({ plain: true });
-				if (resObj.deck_components.length == 0)
+				if (resObj.deck_components.length == 0) {
+					resObj.cards = [];
 					return resObj;
+				}
 				const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
 				// console.log(id_arr);
 				return mtg.card.where({ multiverseid: id_arr })
@@ -85,14 +87,15 @@ router.get('/:id', (req, res) => {
 		
 	])
 		.then(([dbDeckData, cards]) => {
-			// console.log(dbDeckData);
-			console.log(cards);
+			console.log(dbDeckData);
+			// console.log(cards);
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId);
 			console.log(id_arr);
 			dbDeckData.cards = dbDeckData.cards.map(card => {
 				card.count = id_arr.filter(id => card.multiverseid == id ).length;
 				return card;
 			})
+			// console.log(dbDeckData.deck_components);
 			res.render('build', {
 				username: req.session.username,
 				deck: dbDeckData,
