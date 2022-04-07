@@ -1,22 +1,39 @@
-<form id='search-card-form'>
-	<input type='text' id='search-card-input' placeholder='Search...' />
-</form>
-
-<div id='deck-builder-view'>
-	<section id='card-view'>
-		{{#each cards as |card|}}
-		<img src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}' />
-		{{/each}}
-	</section>
-
-	<section id='deck-view'>
-		<ul id='card-list' class='list-group'>
-			<h3 id='deck-name' class='list-group-item mb-0'>{{deck.name}}</h3>
-			{{#each deck.cards as |card|}}
-			<li class='list-group-item' data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>{{card.name}}</li>
-			{{/each}}
-		</ul>
-	</section>
+<div class="container d-md-flex w-100 ">
+	<div class="row justify-content-center">
+		<form id='search-card-form' class="justify-content-center bg-dark text-light border border-5 border-dark ">
+			<p>Search By Card Name</p>
+			<input type='text' id='card-name-input' placeholder='Card Name' />
+			<p>Search By Card Type</p>
+			<input type="text" id="card-type-input" placeholder="Card Type">
+			<p>Search By Card Text</p>
+			<input type="text" id="card-text-input" placeholder="Card Text">
+			<button type="button" id="search-button">Search</button>
+		</form>
+	</div>
+	<div id='deck-builder-view' class="row w-100">
+		<div class="container">
+			<section id='card-view' class="d-flex flex-row flex-wrap justify-content-center">
+				{{#each cards as |card|}}
+				<img class="card-image m-2" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
+					data-multiverseId='{{card.multiverseid}}' alt='{{card.name}}'/>
+				{{/each}}
+			</section>
+		</div>
+	</div>
+	<div class="bg-dark">
+		<section id='deck-view'>
+			<ul id='card-list' class='list-group'>
+				<h3 id='deck-name' class='list-group-item mb-0'>{{deck.name}}</h3>
+				{{#each deck.cards as |card|}}
+				<li class='list-group-item bg-dark text-light border border-4 border-light rounded pointer' data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>
+					{{card.name}}
+					<p>Count: {{card.count}}</p>
+				</li>
+					
+				{{/each}}
+			</ul>
+		</section>
+	</div>
 </div>
-
+</div>
 <script src='/js/build-script.js'></script>
