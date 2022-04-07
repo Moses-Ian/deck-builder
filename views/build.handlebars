@@ -2,18 +2,19 @@
 	<div class="row justify-content-center">
 		<form id='search-card-form' class="justify-content-center bg-dark text-light border border-5 border-dark ">
 			<p>Search By Card Name</p>
-			<input type='text' id='search-card-input' placeholder='Card Name' />
+			<input type='text' id='card-name-input' placeholder='Card Name' />
 			<p>Search By Card Type</p>
-			<input type="text" placeholder="Card Type">
+			<input type="text" id="card-type-input" placeholder="Card Type">
 			<p>Search By Card Text</p>
-			<input type="text" placeholder="Card Text">
+			<input type="text" id="card-text-input" placeholder="Card Text">
+			<button type="button" id="search-button">Search</button>
 		</form>
 	</div>
 	<div id='deck-builder-view' class="row w-100">
 		<div class="container">
-			<section id='card-view' class="d-flex flex-row flex-wrap">
+			<section id='card-view' class="d-flex flex-row flex-wrap justify-content-center">
 				{{#each cards as |card|}}
-				<img class="m-3" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
+				<img class="mb-3" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
 					data-multiverseId='{{card.multiverseid}}' />
 				{{/each}}
 			</section>

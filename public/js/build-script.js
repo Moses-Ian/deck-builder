@@ -10,7 +10,7 @@ const cardListEl = document.querySelector('#card-list');
 //====================================
 function getId() {
 	let loc = document.location.href.split('/');
-	loc = loc[loc.length-1].split('?');
+	loc = loc[loc.length - 1].split('?');
 	return loc[0];
 }
 
@@ -19,7 +19,7 @@ async function addCard(event) {
 	const imageUrl = event.target.dataset.imageurl;
 	if (!multiverseId)
 		return;
-	
+
 	const response = await fetch('/api/decks/add-card', {
 		method: 'POST',
 		body: JSON.stringify({
@@ -28,10 +28,10 @@ async function addCard(event) {
 			deck_id: getId()
 		}),
 		headers: {
-      'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 		}
 	});
-	
+
 	if (response.ok) {
 		document.location.reload();
 	} else {
@@ -50,10 +50,10 @@ async function removeCard(event) {
 			deck_id: getId()
 		}),
 		headers: {
-      'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 		}
 	});
-	
+
 	if (response.ok) {
 		document.location.reload();
 	} else {
@@ -64,12 +64,12 @@ async function removeCard(event) {
 function editName(event) {
 	const nameH3 = event.target;
 	const name = event.target.textContent;
-	
+
 	const textInput = document.createElement('input');
 	textInput.setAttribute('type', 'text');
 	textInput.setAttribute('placeholder', name);
 	textInput.addEventListener('blur', updateName);
-	
+
 	nameH3.remove();
 	cardListEl.prepend(textInput);
 	textInput.focus();
@@ -78,16 +78,16 @@ function editName(event) {
 function updateName(event) {
 	const nameInput = event.target;
 	const newName = nameInput.value.trim() || nameInput.placeholder;
-	
+
 	const nameH3 = document.createElement('h3');
 	nameH3.textContent = newName;
 	nameH3.classList.add('list-group-item', 'mb-0');
 	nameH3.addEventListener('click', editName);
 	nameInput.remove();
 	cardListEl.prepend(nameH3);
-	
+
 	const deck_id = getId();
-	
+
 	fetch(`/api/decks/${deck_id}`, {
 		method: 'PUT',
 		body: JSON.stringify({
@@ -95,16 +95,21 @@ function updateName(event) {
 			deck_id
 		}),
 		headers: {
-      'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 		}
 	})
 }
 
 function search(event) {
 	event.preventDefault();
-	const query = document.querySelector('#search-card-input').value.trim();
-	window.location.href = `/build/${getId()}?search=${query}`;
+	const name = document.querySelector('#card-name-input').value.trim();
+	const type = document.querySelector('#card-type-input').value.trim();
+	const text = document.querySelector('#card-text-input').value.trim();
+
+
+	window.location.href = `/build/${getId()}?name=${name}&type=${type}&text=${text}`;
 }
+
 
 
 
@@ -115,7 +120,7 @@ function search(event) {
 document.querySelector('#card-view').addEventListener('click', addCard);
 document.querySelector('#card-list').addEventListener('click', removeCard);
 document.querySelector('#deck-name').addEventListener('click', editName);
-document.querySelector('#search-card-form').addEventListener('submit', search);
+document.querySelector('#search-button').addEventListener('click', search);
 
 
 

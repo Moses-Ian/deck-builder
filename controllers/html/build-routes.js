@@ -3,6 +3,7 @@ const sequelize = require('../../config/connection');
 const { User, Deck, Deck_Components } = require('../../models');
 const mtg = require('mtgsdk');
 const { withAuth, writeAuth } = require('../../utils/auth');
+const { text } = require('express');
 
 router.use(withAuth);
 
@@ -28,15 +29,25 @@ router.get('/:id', (req, res) => {
 	// console.log(req.params.id);
 	// console.log(decodeURIComponent(req.query));
 
-	const search = req.query.search;
+	const name = req.query.name;
+	const text = req.query.text;
+	const type = req.query.type;
+
 	let whereObj = {
 		page: 1,
+
 		// pageSize: 20
-		pageSize: 20	//limit this because my internet sucks while i'm testing
+		pageSize: 16	//limit this because my internet sucks while i'm testing
 	}
-	if (search) {
-		whereObj.name = search;
+	if (name) {
+		whereObj.name = name;		
 		// whereObj.text = search;	//this ands them together
+	}
+	if (text) {
+		whereObj.text = text;
+	}
+	if (type) {
+		whereObj.type = type;
 	}
 
 	// make the deck, then show a basic search result
@@ -69,15 +80,13 @@ router.get('/:id', (req, res) => {
 						return resObj;
 					});
 			}),
-
-
-
 		//chain 2
 		mtg.card.where(whereObj)
+		
 	])
 		.then(([dbDeckData, cards]) => {
 			// console.log(dbDeckData);
-			// console.log(cards);
+			console.log(cards);
 			res.render('build', {
 				username: req.session.username,
 				deck: dbDeckData,
