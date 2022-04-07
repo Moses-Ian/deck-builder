@@ -30,7 +30,7 @@ body {
   color: #3486eb;
 }
 
-#deck-builder-view {
+/* #deck-builder-view {
 	display: flex;
 }
 
@@ -47,7 +47,7 @@ body {
 	flex-grow: 1;
 	flex-basis: fit-content;
 	margin-right: 5px;
-}
+} */
 
 p small {
 	font-size: 12px;
@@ -56,7 +56,6 @@ p small {
 #card-list li:hover {
 	background-color: #007bff;
 	color: white;
-	cursor: pointer;
 }
 
 #card-list li:active {
@@ -69,6 +68,16 @@ footer {
 
 .card {
 	max-width: 400px;
+}
+
+.card-image {
+	width: 212px;
+	height: 296px;
+	color: white;
+}		
+
+.pointer:hover {
+	cursor: pointer;
 }
 
 /* // Extra small devices (portrait phones, less than 576px) */
@@ -94,8 +103,11 @@ footer {
 
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-	
-	
+	.card-image {
+		width: 265px;
+		height: 370px;
+	}
+
 }
 
 

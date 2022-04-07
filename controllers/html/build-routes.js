@@ -3,6 +3,7 @@ const sequelize = require('../../config/connection');
 const { User, Deck, Deck_Components } = require('../../models');
 const mtg = require('mtgsdk');
 const { withAuth, writeAuth } = require('../../utils/auth');
+const { text } = require('express');
 
 router.use(withAuth);
 
@@ -28,15 +29,24 @@ router.get('/:id', (req, res) => {
 	// console.log(req.params.id);
 	// console.log(decodeURIComponent(req.query));
 
-	const search = req.query.search;
+	const name = req.query.name;
+	const text = req.query.text;
+	const type = req.query.type;
+
 	let whereObj = {
 		page: 1,
 		// pageSize: 24
 		pageSize: 5	//limit this because my internet sucks while i'm testing
 	}
-	if (search) {
-		whereObj.name = search;
+	if (name) {
+		whereObj.name = name;		
 		// whereObj.text = search;	//this ands them together
+	}
+	if (text) {
+		whereObj.text = text;
+	}
+	if (type) {
+		whereObj.type = type;
 	}
 
 	// make the deck, then show a basic search result
@@ -59,8 +69,10 @@ router.get('/:id', (req, res) => {
 					return;
 				}
 				let resObj = dbDeckData.get({ plain: true });
-				if (resObj.deck_components.length == 0)
+				if (resObj.deck_components.length == 0) {
+					resObj.cards = [];
 					return resObj;
+				}
 				const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
 				// console.log(id_arr);
 				return mtg.card.where({ multiverseid: id_arr })
@@ -69,15 +81,20 @@ router.get('/:id', (req, res) => {
 						return resObj;
 					});
 			}),
-
-
-
 		//chain 2
 		mtg.card.where(whereObj)
+		
 	])
 		.then(([dbDeckData, cards]) => {
 			// console.log(dbDeckData);
-			// console.log(cards);
+			
+			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId);
+			
+			dbDeckData.cards = dbDeckData.cards.map(card => {
+				card.count = id_arr.filter(id => card.multiverseid == id ).length;
+				return card;
+			})
+			console.log(cards);
 			res.render('build', {
 				username: req.session.username,
 				deck: dbDeckData,
