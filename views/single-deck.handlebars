@@ -1,16 +1,42 @@
-{{> deck-info deck}}
+<!-- {{> deck-info deck}} -->
 
-<ul id='card-title-list'>
-	{{#each deck.cards as |card|}}
-	<li>{{card.name}}</li>
-	{{/each}}
-</ul>
+<!-- <ul id='card-title-list'> -->
+	<!-- {{#each deck.cards as |card|}} -->
+	<!-- <li>{{card.name}}</li> -->
+	<!-- {{/each}} -->
+<!-- </ul> -->
 
-<ul id='card-images'>
-	{{#each deck.cards as |card|}}
-	<li>
-		<img src='{{imageUrl}}' alt='{{card.name}}'/>
-	</li>
-	{{/each}}
-</ul>
+<!-- <ul id='card-images'> -->
+	<!-- {{#each deck.cards as |card|}} -->
+	<!-- <li> -->
+		<!-- <img src='{{imageUrl}}' alt='{{card.name}}'/> -->
+	<!-- </li> -->
+	<!-- {{/each}} -->
+<!-- </ul> -->
 
+<div class="container d-sm-flex w-100 ">
+	<div id='deck-builder-view' class="row w-100">
+		<div class="container">
+			<section id='card-view' class="d-flex flex-row flex-wrap justify-content-center">
+				{{#each deck.cards as |card|}}
+				<img class="card-image m-2" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
+					data-multiverseId='{{card.multiverseid}}' alt='{{card.name}}'/>
+				{{/each}}
+			</section>
+		</div>
+	</div>
+	<div class="bg-dark">
+		<section id='deck-view'>
+			<ul id='card-list' class='list-group'>
+				<h3 id='deck-name' class='list-group-item mb-0'>{{deck.name}}</h3>
+				{{#each deck.cards as |card|}}
+				<li class='list-group-item bg-dark text-light border border-4 border-light rounded' data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>
+					{{card.name}}
+					<p>Count: {{card.count}}</p>
+				</li>
+					
+				{{/each}}
+			</ul>
+		</section>
+	</div>
+</div>

@@ -56,7 +56,6 @@ p small {
 #card-list li:hover {
 	background-color: #007bff;
 	color: white;
-	cursor: pointer;
 }
 
 #card-list li:active {
@@ -75,6 +74,10 @@ footer {
 	width: 265px;
 	height: 370px;
 	color: white;
+}
+
+.pointer:hover {
+	cursor: pointer;
 }
 
 /* // Extra small devices (portrait phones, less than 576px) */
