@@ -14,8 +14,12 @@
 		<div class="container">
 			<section id='card-view' class="d-flex flex-row flex-wrap justify-content-center">
 				{{#each cards as |card|}}
+				{{#if card.imageUrl}}
+				{{#if card.multiverseid}}
 				<img class="card-image m-2" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
-					data-multiverseId='{{card.multiverseid}}' alt='{{card.name}}'/>
+					data-multiverseId='{{card.multiverseid}}' alt='{{card.name}}' />
+				{{/if}}
+				{{/if}}
 				{{/each}}
 			</section>
 		</div>
@@ -25,11 +29,11 @@
 			<ul id='card-list' class='list-group'>
 				<h3 id='deck-name' class='list-group-item mb-0'>{{deck.name}}</h3>
 				{{#each deck.cards as |card|}}
-				<li class='list-group-item bg-dark text-light border border-4 border-light rounded pointer' data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>
+				<li class='list-group-item bg-dark text-light border border-4 border-light rounded pointer'
+					data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>
 					{{card.name}}
 					<p>Count: {{card.count}}</p>
 				</li>
-					
 				{{/each}}
 			</ul>
 		</section>

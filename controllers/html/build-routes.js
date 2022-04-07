@@ -87,14 +87,14 @@ router.get('/:id', (req, res) => {
 	])
 		.then(([dbDeckData, cards]) => {
 			// console.log(dbDeckData);
-			console.log(cards);
+			
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId);
-			console.log(id_arr);
+			
 			dbDeckData.cards = dbDeckData.cards.map(card => {
 				card.count = id_arr.filter(id => card.multiverseid == id ).length;
 				return card;
 			})
-			// console.log(dbDeckData.deck_components);
+			console.log(cards);
 			res.render('build', {
 				username: req.session.username,
 				deck: dbDeckData,
