@@ -86,8 +86,8 @@ router.get('/:id', (req, res) => {
 		
 	])
 		.then(([dbDeckData, cards]) => {
-			console.log(dbDeckData);
-			// console.log(cards);
+			// console.log(dbDeckData);
+			console.log(cards);
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId);
 			console.log(id_arr);
 			dbDeckData.cards = dbDeckData.cards.map(card => {

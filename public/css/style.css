@@ -71,6 +71,12 @@ footer {
 	max-width: 400px;
 }
 
+.card-image {
+	width: 265px;
+	height: 370px;
+	color: white;
+}
+
 /* // Extra small devices (portrait phones, less than 576px) */
 /* // No media query since this is the default in Bootstrap */
 

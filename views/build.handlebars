@@ -14,8 +14,8 @@
 		<div class="container">
 			<section id='card-view' class="d-flex flex-row flex-wrap justify-content-center">
 				{{#each cards as |card|}}
-				<img class="mb-3" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
-					data-multiverseId='{{card.multiverseid}}' />
+				<img class="card-image m-2" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
+					data-multiverseId='{{card.multiverseid}}' alt='{{card.name}}'/>
 				{{/each}}
 			</section>
 		</div>
