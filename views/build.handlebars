@@ -1,4 +1,4 @@
-<div class="container d-sm-flex w-100 ">
+<div class="container d-md-flex w-100 ">
 	<div class="row justify-content-center">
 		<form id='search-card-form' class="justify-content-center bg-dark text-light border border-5 border-dark ">
 			<p>Search By Card Name</p>
@@ -14,8 +14,8 @@
 		<div class="container">
 			<section id='card-view' class="d-flex flex-row flex-wrap justify-content-center">
 				{{#each cards as |card|}}
-				<img class="mb-3" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
-					data-multiverseId='{{card.multiverseid}}' />
+				<img class="card-image m-2" src='{{card.imageUrl}}' data-imageurl={{card.imageUrl}}
+					data-multiverseId='{{card.multiverseid}}' alt='{{card.name}}'/>
 				{{/each}}
 			</section>
 		</div>
@@ -25,7 +25,7 @@
 			<ul id='card-list' class='list-group'>
 				<h3 id='deck-name' class='list-group-item mb-0'>{{deck.name}}</h3>
 				{{#each deck.cards as |card|}}
-				<li class='list-group-item bg-dark text-light border border-4 border-light rounded' data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>
+				<li class='list-group-item bg-dark text-light border border-4 border-light rounded pointer' data-imageUrl={{card.imageUrl}} data-multiverseId='{{card.multiverseid}}'>
 					{{card.name}}
 					<p>Count: {{card.count}}</p>
 				</li>

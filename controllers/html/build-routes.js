@@ -8,7 +8,7 @@ const { text } = require('express');
 router.use(withAuth);
 
 router.get('/new', (req, res) => {
-	console.log('got here');
+	// console.log('got here');
 	Deck.create({
 		name: 'Deck Name',
 		user_id: req.session.user_id
@@ -35,9 +35,8 @@ router.get('/:id', (req, res) => {
 
 	let whereObj = {
 		page: 1,
-
-		// pageSize: 20
-		pageSize: 2	//limit this because my internet sucks while i'm testing
+		// pageSize: 24
+		pageSize: 5	//limit this because my internet sucks while i'm testing
 	}
 	if (name) {
 		whereObj.name = name;		
@@ -87,8 +86,8 @@ router.get('/:id', (req, res) => {
 		
 	])
 		.then(([dbDeckData, cards]) => {
-			console.log(dbDeckData);
-			// console.log(cards);
+			// console.log(dbDeckData);
+			console.log(cards);
 			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId);
 			console.log(id_arr);
 			dbDeckData.cards = dbDeckData.cards.map(card => {

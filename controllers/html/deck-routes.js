@@ -30,19 +30,29 @@ router.get('/:id', (req, res) => {
 				return;
 			}
 			// console.log(dbDeckData);
+			let deck = dbDeckData.get({ plain: true });
+			const username = req.session.username || null;
 			if (dbDeckData.deck_components.length == 0) {
-				res.json(dbDeckData);
+				// res.json(dbDeckData);
+				deck.cards = [];
+				res.render('single-deck', {
+					deck,
+					loggedIn: req.session.loggedIn,
+					username
+				});
 				return;
 			}
 			// res.json(dbDeckData);
 			//get the cards from mtg based on the multiverse ids
-			let deck = dbDeckData.get({ plain: true });
-			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId).join(',');
-			console.log(id_arr);
-			const username = req.session.username || null;
-			mtg.card.where({ multiverseid: id_arr })
+			const id_arr = dbDeckData.deck_components.map(card => card.multiverseId);
+			const id_str = id_arr.join(',');
+			// console.log(id_arr);
+			mtg.card.where({ multiverseid: id_str })
 				.then(cards => {
-					deck.cards = cards;
+					deck.cards = cards.map(card => {
+				card.count = id_arr.filter(id => card.multiverseid == id ).length;
+				return card;
+			});
 					// res.json(deck);
 					res.render('single-deck', {
 						deck,

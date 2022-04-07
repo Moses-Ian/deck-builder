@@ -17,6 +17,10 @@ router.get('/', (req, res) => {
 					{
 						model: User,
 						attributes: ['username']
+					},
+					{
+						model: Deck_Components,
+						attributes: ['imageUrl']
 					}
 				]
 			}
@@ -25,6 +29,13 @@ router.get('/', (req, res) => {
 		.then(dbUserData => {
 			// console.log(dbUserData);
 			const data = dbUserData.get({ plain: true });
+			console.log(data);
+			data.decks.forEach(deck => {
+				if( !deck.deck_components[0] )
+					deck.imageUrl = '/images/card-back.jpg';
+				else
+					deck.imageUrl = deck.deck_components[0].imageUrl;
+			});
 			res.render('dashboard', {
 				data,
 				loggedIn: req.session.loggedIn
